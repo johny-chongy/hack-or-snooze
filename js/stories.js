@@ -64,8 +64,9 @@ function putStoriesOnPage() {
 //   let submittedStory = {author, title, url};
 //   console.log('submitted story', submittedStory);
 
-//    StoryList.addStory(currentUser, submittedStory);
-//   // putStoriesOnPage();
-// }
+  await StoryList.addStory(currentUser, submittedStory);
+  putStoriesOnPage();
+
+}
 
 // $("#submit-new-article").on("click", retrieveNewStory);
