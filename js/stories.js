@@ -55,7 +55,8 @@ function putStoriesOnPage() {
  *  and puts new story on the page
  */
 
- async function retrieveNewStory() {
+ async function retrieveNewStory(evt) {
+  evt.preventDefault();
   console.log('testing 123');
   let author = $("#new-article-author").val;
   let title = $("#new-article-title").val;
@@ -69,4 +70,4 @@ function putStoriesOnPage() {
 
 }
 
-$("#submit-new-article").on("click", retrieveNewStory);
+$submitArticle.on("submit", retrieveNewStory);
