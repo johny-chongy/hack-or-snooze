@@ -79,12 +79,14 @@ class StoryList {
   //assign ^ to a Story instance
   //add ^ to the story list
   async addStory(user, newStory) {
-    let addedStoryRequest = await axios.post(`${BASE_URL}/stories`, {params: {
+    // console.log("user is: ", user);
+    // console.log("newStory is ", newStory);
+    let addedStoryRequest = await axios.post(`${BASE_URL}/stories`, {
       "token": user.loginToken,
       "story": newStory
-        }
-    });
-    console.log(`addedStoryRequest = ${addedStoryRequest}`);
+        });
+    // console.log(`addedStoryRequest = ${addedStoryRequest}`);
+
     let addedStory = new Story(addedStoryRequest.data.story);
     this.stories.push(addedStory);
 
