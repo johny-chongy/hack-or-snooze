@@ -65,6 +65,7 @@ async function retrieveNewStory() {
 
   await StoryList.addStory(currentUser, submittedStory);
   putStoriesOnPage();
+
 }
 
 $("#submit-new-article").on("click",retrieveNewStory);
