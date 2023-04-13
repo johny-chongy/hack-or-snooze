@@ -42,8 +42,8 @@ class StoryList {
   /** Generate a new StoryList. It:
    *
    *  - calls the API
-   *  - builds an array of Story instances
-   *  - makes a single StoryList instance out of that
+   *  - builds an array ofs a single  Story instances
+   *  - makeStoryList instance out of that
    *  - returns the StoryList instance.
    */
 
@@ -72,11 +72,26 @@ class StoryList {
    *
    * Returns the new Story instance
    */
+   /* user, newStory */
 
-  async addStory( /* user, newStory */) {
-    // UNIMPLEMENTED: complete this function!
-  }
+  //make request to API to create story for database (using user token and
+  //newStory inputs)
+  //assign ^ to a Story instance
+  //add ^ to the story list
+  async addStory(user, newStory) {
+    let addedStoryRequest = await axios.post(`${BASE_URL}/stories`, {params: {
+      "token": user.loginToken,
+      "story": newStory
+        }
+    });
+    console.log(`addedStoryRequest = ${addedStoryRequest}`);
+    let addedStory = new Story(addedStoryRequest.data.story);
+    this.stories.push(addedStory);
+
+    return addedStory;
+    }
 }
+
 
 
 /******************************************************************************
