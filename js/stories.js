@@ -55,7 +55,7 @@ function putStoriesOnPage() {
  *  and puts new story on the page
  */
 
- function retrieveNewStory() {
+ async function retrieveNewStory() {
   console.log('testing 123');
   let author = $("#new-article-author").val;
   let title = $("#new-article-title").val;
