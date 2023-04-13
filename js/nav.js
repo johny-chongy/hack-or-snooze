@@ -10,6 +10,7 @@ function navSubmitArticle(evt) {
   evt.preventDefault();
   hidePageComponents();
   $submitArea.show();
+  // console.log(putStoriesOnPage);
   putStoriesOnPage();
 }
 

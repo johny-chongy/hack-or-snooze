@@ -55,16 +55,17 @@ function putStoriesOnPage() {
  *  and puts new story on the page
  */
 
-async function retrieveNewStory() {
-  let author = $("#new-article-author").val;
-  let title = $("#new-article-title").val;
-  let url = $("#new-article-url").val;
+//  function retrieveNewStory() {
+//   console.log('testing 123');
+//   let author = $("#new-article-author").val;
+//   let title = $("#new-article-title").val;
+//   let url = $("#new-article-url").val;
 
-  let submittedStory = {author, title, url};
-  console.log('submitted story', submittedStory);
+//   let submittedStory = {author, title, url};
+//   console.log('submitted story', submittedStory);
 
-  await StoryList.addStory(currentUser, submittedStory);
-  putStoriesOnPage();
-}
+//    StoryList.addStory(currentUser, submittedStory);
+//   // putStoriesOnPage();
+// }
 
-$("#submit-new-article").on("click",retrieveNewStory);
+// $("#submit-new-article").on("click", retrieveNewStory);
