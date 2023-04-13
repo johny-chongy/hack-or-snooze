@@ -4,6 +4,17 @@
  * Handling navbar clicks and updating navbar
  */
 
+function navSubmitArticle(evt) {
+  console.log("navSubmitArticle START");
+  console.debug("navSubmitArticle", evt);
+  evt.preventDefault();
+  hidePageComponents();
+  $submitArea.show();
+  putStoriesOnPage();
+}
+
+$("#nav-submit-story").on("click", navSubmitArticle);
+
 /** Show main list of all stories when click site name */
 
 function navAllStories(evt) {

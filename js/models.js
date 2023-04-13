@@ -78,8 +78,8 @@ class StoryList {
   //newStory inputs)
   //assign ^ to a Story instance
   //add ^ to the story list
-  async addStory(user, newStory) {
-    // console.log("user is: ", user);
+  static async addStory(user, newStory) {
+    console.log("user is: ", user);
     // console.log("newStory is ", newStory);
     let addedStoryRequest = await axios.post(`${BASE_URL}/stories`, {
       "token": user.loginToken,
