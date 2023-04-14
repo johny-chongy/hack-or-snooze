@@ -48,3 +48,17 @@ function updateNavOnLogin() {
   $navLogOut.show();
   $navUserProfile.text(`${currentUser.username}`).show();
 }
+/** Clears the opage and shows only the favorites */
+function navFavoritesClick(evt){
+  console.debug("navFavoritesClick has been reached");
+  $allStoriesList.empty();
+
+  for (let story of currentUser.favorites) {
+    const $story = generateStoryMarkup(story);
+    $allStoriesList.append($story);
+  }
+
+  $allStoriesList.show();
+}
+
+$navFavorites.on("click", navFavoritesClick);

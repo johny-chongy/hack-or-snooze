@@ -234,4 +234,17 @@ class User {
   /** Takes a Story instance and REMOVES input story and remaps
    *  currentUser.favorites to the favorite array from DELETE request
     */
+  async removeFavoriteStory(story){
+    let username = currentUser.username;
+    let userToken = currentUser.loginToken;
+    let storyId = story.storyId;
+
+    const response = await axios({
+      url: `${BASE_URL}/users/${username}/favorites/${storyId}`,
+      method: "DELETE",
+      data: {token: userToken}
+    });
+
+    currentUser.favorites = response.data.user.favorites;
+  }
 }
