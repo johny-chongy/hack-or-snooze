@@ -59,18 +59,13 @@ function navFavoritesClick(evt) {
   $allStoriesList.empty();
   $submitArea.hide();
 
+  putFavoritesOnPage();
 //TODO: move this logic below elsewhere
-  for (let story of currentUser.favorites) {
-    // console.log("story in loop is=", story);
-    // console.log(story instanceof Story);
-    // console.log("story is =", story);
-    // console.log("story.starIsFIlled = ", story.starIsFilled);
-    const $story = generateStoryMarkup(new Story({ ...story }, true));
-    // console.log()
-    $allStoriesList.append($story);
-  }
-
-  $allStoriesList.show();
+  // for (let story of currentUser.favorites) {
+  //   const $story = generateStoryMarkup(new Story({ ...story }, true));
+  //   $allStoriesList.append($story);
+  // }
+  // $allStoriesList.show();
 }
 
 $navFavorites.on("click", navFavoritesClick);

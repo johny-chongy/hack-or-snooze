@@ -221,41 +221,29 @@ class User {
    */
   //TODO: let or const: be consistent. Destructure currentUser object (same variables)
   async addFavoriteStory(story) {
-    let username = currentUser.username;
-    let userToken = currentUser.loginToken;
-    let storyId = story.storyId;
-
-    const response = await axios({
-      url: `${BASE_URL}/users/${username}/favorites/${storyId}`,
-      method: "POST",
-      data: {token: userToken}
-    });
-    //TODO: consider large scale (prepend)
-    currentUser.favorites = response.data.user.favorites;
-    // console.log(currentUser.favorites);
-
+   this.#addOrRemoveFavorite(story, "POST");
   }
 
   //TODO: make some function (#privateMethod; can only be called by instance methods)
 
-  async #addOrRemoveFavorite(story, requesType) {
+  async #addOrRemoveFavorite(story, requestType) {
+    let username = currentUser.username;
+    let loginToken = currentUser.loginToken;
+    let storyId = story.storyId;
 
+    const response = await axios({
+      url: `${BASE_URL}/users/${username}/favorites/${storyId}`,
+      method: `${requestType}`,
+      data: {token: loginToken}
+    });
+
+    currentUser.favorites = response.data.user.favorites;
   }
 
   /** Takes a Story instance and REMOVES input story and remaps
    *  currentUser.favorites to the favorite array from DELETE request
     */
   async removeFavoriteStory(story){
-    let username = currentUser.username;
-    let userToken = currentUser.loginToken;
-    let storyId = story.storyId;
-
-    const response = await axios({
-      url: `${BASE_URL}/users/${username}/favorites/${storyId}`,
-      method: "DELETE",
-      data: {token: userToken}
-    });
-
-    currentUser.favorites = response.data.user.favorites;
+    this.#addOrRemoveFavorite(story, "DELETE");
   }
 }

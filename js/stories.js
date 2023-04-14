@@ -26,11 +26,13 @@ function generateStoryMarkup(story) {
   let starClass = story.starIsFilled ? "bi-star-fill" : "bi-star" ;
 
   console.log('currentUser =', currentUser);
+  // console.log("method exist? ", story.prototype.getHostName);
   if (!currentUser) {
     starClass = undefined;
   }
 
   // console.log(starClass);
+
   const hostName = story.getHostName();
   return $(`
   <li id="${story.storyId}">
@@ -47,6 +49,20 @@ function generateStoryMarkup(story) {
 
 /** Gets list of stories from server, generates their HTML, and puts on page. */
 //TODO: putFavoritesOnPage() | iterate through user's favorites instead of storyList
+
+function putFavoritesOnPage(){
+  $allStoriesList.empty();
+  console.log("inside of putFavoritesOnPage");
+  // loop through all of our stories and generate HTML for them
+  //prepend to container instead of loop
+  for (let story of currentUser.favorites) {
+    // console.log("story is", story);
+    const $story = generateStoryMarkup(new Story({...story}));
+    $allStoriesList.append($story);
+  }
+
+  $allStoriesList.show();
+}
 
 function putStoriesOnPage() {
   console.debug("putStoriesOnPage");
