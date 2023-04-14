@@ -43,6 +43,7 @@ function putStoriesOnPage() {
   $allStoriesList.empty();
 
   // loop through all of our stories and generate HTML for them
+  //prepend to container instead of loop
   for (let story of storyList.stories) {
     const $story = generateStoryMarkup(story);
     $allStoriesList.append($story);
@@ -54,20 +55,19 @@ function putStoriesOnPage() {
 /** Retrieves submitted information for new story, call StoryList.addStory
  *  and puts new story on the page
  */
-
- async function retrieveNewStory(evt) {
+async function retrieveNewStory(evt) {
   evt.preventDefault();
-  console.log('testing 123');
-  let author = $("#new-article-author").val;
-  let title = $("#new-article-title").val;
-  let url = $("#new-article-url").val;
 
-  let submittedStory = {author, title, url};
-  console.log('submitted story', submittedStory);
+  let author = $("#new-article-author").val();
+  let title = $("#new-article-title").val();
+  let url = $("#new-article-url").val();
 
-  await StoryList.addStory(currentUser, submittedStory)
-  putStoriesOnPage();
+  let submittedStory = { author, title, url };
+  let currentStory = await storyList.addStory(currentUser, submittedStory);
+  let $currentStory = generateStoryMarkup(currentStory);
 
+  $allStoriesList.prepend($currentStory);
+  $submitForm.trigger("reset");
 }
 
-$submitArticle.on("submit", retrieveNewStory);
+$submitForm.on("submit", retrieveNewStory);

@@ -72,28 +72,28 @@ class StoryList {
    *
    * Returns the new Story instance
    */
-   /* user, newStory */
+  /* user, newStory */
 
   //make request to API to create story for database (using user token and
   //newStory inputs)
   //assign ^ to a Story instance
   //add ^ to the story list
    async addStory(user, newStory) {
-    console.log("user is: ", user);
-    // console.log("newStory is ", newStory);
-    let addedStoryRequest = await axios.post(`${BASE_URL}/stories`, {
-      "token": user.loginToken,
-      "story": newStory
-        });
-    console.log(`addedStoryRequest = ${addedStoryRequest}`);
+    let addedStoryRequest = await axios({
+      url: `${BASE_URL}/stories`,
+      method: "POST",
+      data: {
+        token: user.loginToken,
+        story: newStory
+      }
+    });
 
     let addedStory = new Story(addedStoryRequest.data.story);
-    this.stories.push(addedStory);
+    this.stories.unshift(addedStory);
 
     return addedStory;
-    }
+  }
 }
-
 
 
 /******************************************************************************
@@ -107,13 +107,13 @@ class User {
    */
 
   constructor({
-                username,
-                name,
-                createdAt,
-                favorites = [],
-                ownStories = []
-              },
-              token) {
+    username,
+    name,
+    createdAt,
+    favorites = [],
+    ownStories = []
+  },
+    token) {
     this.username = username;
     this.name = name;
     this.createdAt = createdAt;
