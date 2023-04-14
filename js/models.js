@@ -210,4 +210,28 @@ class User {
       return null;
     }
   }
+
+  /** Takes a Story instance, remaps currentUser.favorites to
+   *  API response object favorites. Also makes POST request to API
+   *  for creating a new favorite story
+   */
+  async addFavoriteStory(story) {
+    let username = currentUser.username;
+    let userToken = currentUser.loginToken;
+    let storyId = story.storyId;
+
+    const response = await axios({
+      url: `${BASE_URL}/users/${username}/favorites/${storyId}`,
+      method: "POST",
+      data: {token: userToken}
+    });
+
+    currentUser.favorites = response.data.user.favorites;
+    // console.log(currentUser.favorites);
+
+  }
+
+  /** Takes a Story instance and REMOVES input story and remaps
+   *  currentUser.favorites to the favorite array from DELETE request
+    */
 }
