@@ -11,6 +11,22 @@ async function getAndShowStoriesOnStart() {
 
   putStoriesOnPage();
 }
+/** render HTML for individual Story instances that are favorites */
+function generateFavoritesMarkup(favorite) {
+  const hostName = favorite.getHostName();
+  return $(`
+  <li id="${favorite.storyId}">
+  <i class= "bi bi-star-fill"></i>
+  <a href="${favorite.url}" target="a_blank" class="story-link">
+  ${favorite.title}
+  </a>
+  <small class="story-hostname">(${hostName})</small>
+  <small class="story-author">by ${favorite.author}</small>
+  <small class="story-user">posted by ${favorite.username}</small>
+  </li>
+  `);
+}
+
 
 /**
  * A render method to render HTML for an individual Story instance
@@ -19,24 +35,11 @@ async function getAndShowStoriesOnStart() {
  * Returns the markup for the story.
  */
 function generateStoryMarkup(story) {
-  // console.debug("generateStoryMarkup", story);
-  //  console.log(story);
-  //Maybe ---------   check the starIsFilled attribute to
-  //determine which class of star
-  let starClass = story.starIsFilled ? "bi-star-fill" : "bi-star" ;
-
-  console.log('currentUser =', currentUser);
-  // console.log("method exist? ", story.prototype.getHostName);
-  if (!currentUser) {
-    starClass = undefined;
-  }
-
-  // console.log(starClass);
 
   const hostName = story.getHostName();
   return $(`
   <li id="${story.storyId}">
-  <i class= "bi ${starClass}"></i>
+  <i class= "bi bi-star"></i>
   <a href="${story.url}" target="a_blank" class="story-link">
   ${story.title}
   </a>
@@ -56,8 +59,8 @@ function putFavoritesOnPage(){
   // loop through all of our stories and generate HTML for them
   //prepend to container instead of loop
   for (let story of currentUser.favorites) {
-    // console.log("story is", story);
-    const $story = generateStoryMarkup(new Story({...story}));
+    console.log("story is", story);
+    const $story = generateFavoritesMarkup(new Story({...story}));
     $allStoriesList.append($story);
   }
 
@@ -72,7 +75,12 @@ function putStoriesOnPage() {
   // loop through all of our stories and generate HTML for them
   //prepend to container instead of loop
   for (let story of storyList.stories) {
-    const $story = generateStoryMarkup(story);
+    let $story;
+    if (Story.storyInFavorites(story.storyId)) {
+      $story = generateFavoritesMarkup(story);
+    } else {
+      $story = generateStoryMarkup(story);
+    }
     $allStoriesList.append($story);
   }
 

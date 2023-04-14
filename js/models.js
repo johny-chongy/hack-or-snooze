@@ -12,15 +12,13 @@ class Story {
    *   - {title, author, url, username, storyId, createdAt}
    */
 //TODO: favorite pertains to USER, not story
-  constructor({ storyId, title, author, url, username, createdAt }, starFill) {
+  constructor({ storyId, title, author, url, username, createdAt }) {
     this.storyId = storyId;
     this.title = title;
     this.author = author;
     this.url = url;
     this.username = username;
     this.createdAt = createdAt;
-    this.starIsFilled = starFill || false;
-    // POSSIBLY ADD this.starIsFilled ------------------------------------
   }
 
   /** Parses hostname out of URL and returns it. */
@@ -29,6 +27,16 @@ class Story {
     let workingUrl = new URL(this.url);
     // UNIMPLEMENTED: complete this function!
     return workingUrl.hostname;
+  }
+
+  /** takes in storyId and checks if it's a favorite and returns boolean */
+  static storyInFavorites(storyId) {
+    for (let story of currentUser.favorites) {
+      if (story.storyId === storyId) {
+        return true;
+      }
+    }
+    return false;
   }
 }
 
