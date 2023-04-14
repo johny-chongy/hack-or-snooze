@@ -46,19 +46,23 @@ function updateNavOnLogin() {
   $(".main-nav-links").show();
   $navLogin.hide();
   $navLogOut.show();
+  $navHidden.show();
   $navUserProfile.text(`${currentUser.username}`).show();
+  $loginForm.hide();
+  $signupForm.hide();
 }
 
 /** Clears the opage and shows only the favorites */
 function navFavoritesClick(evt) {
   console.debug("navFavoritesClick has been reached");
   $allStoriesList.empty();
+  $submitArea.hide();
 
   for (let story of currentUser.favorites) {
     // console.log("story in loop is=", story);
     // console.log(story instanceof Story);
-    console.log("story is =", story);
-    console.log("story.starIsFIlled = ", story.starIsFilled);
+    // console.log("story is =", story);
+    // console.log("story.starIsFIlled = ", story.starIsFilled);
     const $story = generateStoryMarkup(new Story({ ...story }, true));
     // console.log()
     $allStoriesList.append($story);

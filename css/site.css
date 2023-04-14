@@ -67,9 +67,11 @@ form label {
 }
 
 form input {
+  display: inline-block;
   font-size: 0.8rem;
   border: none;
   border-radius: 2px;
+  margin-left: 5px;
   padding: 8px;
   width: 300px;
   box-shadow: 0 0 3px 1px lightgray;
@@ -100,6 +102,11 @@ form > button:hover {
 form > hr {
   margin: 0;
   border: 1px solid lightgray;
+}
+
+.submit-section {
+  display: flex;
+  align-items: center;
 }
 
 .login-input label {

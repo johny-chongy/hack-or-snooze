@@ -12,6 +12,7 @@ const $signupForm = $("#signup-form");
 const $submitArea = $("#submit-area");
 const $submitForm = $("#submit-form");
 
+const $navHidden = $(".main-nav-links-hidden")
 const $navFavorites = $("#nav-favorites-story");
 const $navSubmit = $("#nav-submit-story");
 const $navLogin = $("#nav-login");

@@ -22,15 +22,20 @@ async function getAndShowStoriesOnStart() {
 function generateStoryMarkup(story) {
   // console.debug("generateStoryMarkup", story);
   //  console.log(story);
-  let isStar = currentUser.favorites.includes
   //Maybe ---------   check the starIsFilled attribute to
   //determine which class of star
   let starClass = story.starIsFilled ? "bi-star-fill" : "bi-star" ;
-  console.log(starClass);
+
+  console.log('currentUser =', currentUser);
+  if (!currentUser) {
+    starClass = undefined;
+  }
+
+  // console.log(starClass);
   const hostName = story.getHostName();
   return $(`
       <li id="${story.storyId}">
-        <a href="#" class="star"> <i class= "bi ${starClass}"></i> </a>
+        <i class= "bi ${starClass}"></i>
         <a href="${story.url}" target="a_blank" class="story-link">
           ${story.title}
         </a>
@@ -83,10 +88,11 @@ function clickStar(evt) {
   let clickedStory;
   let clickedStoryId = $(evt.target).closest("li").attr('id');
 
+  console.log('you clicked on ', evt.target);
   for (let story of storyList.stories) {
     if (story.storyId === clickedStoryId) {
       clickedStory = story;
-      console.log("clickedStory=", clickedStory);
+      // console.log("clickedStory=", clickedStory);
       break;
     }
   }
@@ -106,4 +112,4 @@ function clickStar(evt) {
 
 }
 
-$allStoriesList.on("click", "li .star",clickStar);
+$allStoriesList.on("click", "i",clickStar);

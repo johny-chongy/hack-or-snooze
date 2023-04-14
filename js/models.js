@@ -26,8 +26,9 @@ class Story {
   /** Parses hostname out of URL and returns it. */
 
   getHostName() {
+    let workingUrl = new URL(this.url);
     // UNIMPLEMENTED: complete this function!
-    return "hostname.com";
+    return workingUrl.hostname;
   }
 }
 
@@ -170,6 +171,7 @@ class User {
     });
 
     const { user } = response.data;
+    // $navHidden.show();
 
     return new User(
       {

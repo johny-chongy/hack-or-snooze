@@ -52,14 +52,18 @@
 <!-- submit area form -->
 <div id="submit-area" class="hidden">
   <form id="submit-form">
-    <label for="new-article-author">author</label>
-    <input id="new-article-author" type="text" placeholder="author name">
-
-    <label for="new-article-title">title</label>
-    <input id="new-article-title" type="text" placeholder="story title">
-
-    <label for="new-article-url">url</label>
-    <input id="new-article-url" type="text" placeholder="story url">
+    <div class="submit-section">
+      <label for="new-article-author" class="label">author</label>
+      <input id="new-article-author" type="text" placeholder="author name">
+    </div>
+    <div class="submit-section">
+      <label for="new-article-title" class="label">title</label>
+      <input id="new-article-title" type="text" placeholder="story title">
+    </div>
+    <div class="submit-section">
+      <label for="new-article-url" class="label">url</label>
+      <input id="new-article-url" type="text" placeholder="story url">
+    </div>
 
     <button type="submit" id="submit-new-article">submit</button>
   </form>

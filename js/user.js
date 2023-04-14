@@ -59,6 +59,7 @@ $signupForm.on("submit", signup);
 function logout(evt) {
   console.debug("logout", evt);
   localStorage.clear();
+  $navHidden.hide();
   location.reload();
 }
 
@@ -76,8 +77,10 @@ async function checkForRememberedUser() {
   console.debug("checkForRememberedUser");
   const token = localStorage.getItem("token");
   const username = localStorage.getItem("username");
-  if (!token || !username) return false;
-
+  if (!token || !username) {
+    $navHidden.hide();
+    return false;
+  }
   // try to log in with these credentials (will be null if login failed)
   currentUser = await User.loginViaStoredCredentials(token, username);
 }
@@ -110,7 +113,7 @@ function saveUserCredentialsInLocalStorage() {
 function updateUIOnUserLogin() {
   console.debug("updateUIOnUserLogin");
 
-  $allStoriesList.show();
+  putStoriesOnPage();
 
   updateNavOnLogin();
 }
