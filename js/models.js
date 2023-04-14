@@ -12,13 +12,15 @@ class Story {
    *   - {title, author, url, username, storyId, createdAt}
    */
 
-  constructor({ storyId, title, author, url, username, createdAt }) {
+  constructor({ storyId, title, author, url, username, createdAt }, starFill) {
     this.storyId = storyId;
     this.title = title;
     this.author = author;
     this.url = url;
     this.username = username;
     this.createdAt = createdAt;
+    this.starIsFilled = starFill || false;
+    // POSSIBLY ADD this.starIsFilled ------------------------------------
   }
 
   /** Parses hostname out of URL and returns it. */
@@ -60,7 +62,7 @@ class StoryList {
     });
 
     // turn plain old story objects from API into instances of Story class
-    const stories = response.data.stories.map(story => new Story(story));
+    const stories = response.data.stories.map(story => new Story(story, story.starIsFilled));
 
     // build an instance of our own class using the new array of stories
     return new StoryList(stories);

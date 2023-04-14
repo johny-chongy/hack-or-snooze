@@ -48,13 +48,19 @@ function updateNavOnLogin() {
   $navLogOut.show();
   $navUserProfile.text(`${currentUser.username}`).show();
 }
+
 /** Clears the opage and shows only the favorites */
-function navFavoritesClick(evt){
+function navFavoritesClick(evt) {
   console.debug("navFavoritesClick has been reached");
   $allStoriesList.empty();
 
   for (let story of currentUser.favorites) {
-    const $story = generateStoryMarkup(story);
+    // console.log("story in loop is=", story);
+    // console.log(story instanceof Story);
+    console.log("story is =", story);
+    console.log("story.starIsFIlled = ", story.starIsFilled);
+    const $story = generateStoryMarkup(new Story({ ...story }, true));
+    // console.log()
     $allStoriesList.append($story);
   }
 

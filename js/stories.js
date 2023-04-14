@@ -21,11 +21,16 @@ async function getAndShowStoriesOnStart() {
 
 function generateStoryMarkup(story) {
   // console.debug("generateStoryMarkup", story);
-
+  //  console.log(story);
+  let isStar = currentUser.favorites.includes
+  //Maybe ---------   check the starIsFilled attribute to
+  //determine which class of star
+  let starClass = story.starIsFilled ? "bi-star-fill" : "bi-star" ;
+  console.log(starClass);
   const hostName = story.getHostName();
   return $(`
       <li id="${story.storyId}">
-        <a href="#" class="star"> <i class="bi bi-star"></i> </a>
+        <a href="#" class="star"> <i class= "bi ${starClass}"></i> </a>
         <a href="${story.url}" target="a_blank" class="story-link">
           ${story.title}
         </a>
@@ -85,17 +90,17 @@ function clickStar(evt) {
       break;
     }
   }
-
   // console.log(clickedStoryId);
-
   // console.log("clickStar start");
   $(evt.target).toggleClass("bi-star bi-star-fill");
   // console.log("class=",$(evt.target).attr("class"));
 
   if($(evt.target).attr("class") === "bi bi-star") {
     currentUser.removeFavoriteStory(clickedStory);
+    clickedStory.starIsFilled = false;
   } else if ($(evt.target).attr("class") === "bi bi-star-fill") {
     currentUser.addFavoriteStory(clickedStory);
+    clickedStory.starIsFilled = true;
     // console.log("currentUser.favorites=", currentUser.favorites);
   }
 
