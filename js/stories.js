@@ -76,7 +76,9 @@ function putStoriesOnPage() {
   //prepend to container instead of loop
   for (let story of storyList.stories) {
     let $story;
-    if (Story.storyInFavorites(story.storyId)) {
+    if (!currentUser) {
+      $story = generateStoryMarkup(story)
+    } else if (Story.storyInFavorites(story.storyId)) {
       $story = generateFavoritesMarkup(story);
     } else {
       $story = generateStoryMarkup(story);
