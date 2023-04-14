@@ -52,12 +52,14 @@ function updateNavOnLogin() {
   $signupForm.hide();
 }
 
+//TODO: separate concerns; navFavoritesClick only address click functionality ONLY
 /** Clears the opage and shows only the favorites */
 function navFavoritesClick(evt) {
   console.debug("navFavoritesClick has been reached");
   $allStoriesList.empty();
   $submitArea.hide();
 
+//TODO: move this logic below elsewhere
   for (let story of currentUser.favorites) {
     // console.log("story in loop is=", story);
     // console.log(story instanceof Story);

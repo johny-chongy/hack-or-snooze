@@ -11,7 +11,7 @@ class Story {
   /** Make instance of Story from data object about story:
    *   - {title, author, url, username, storyId, createdAt}
    */
-
+//TODO: favorite pertains to USER, not story
   constructor({ storyId, title, author, url, username, createdAt }, starFill) {
     this.storyId = storyId;
     this.title = title;
@@ -219,6 +219,7 @@ class User {
    *  API response object favorites. Also makes POST request to API
    *  for creating a new favorite story
    */
+  //TODO: let or const: be consistent. Destructure currentUser object (same variables)
   async addFavoriteStory(story) {
     let username = currentUser.username;
     let userToken = currentUser.loginToken;
@@ -229,9 +230,15 @@ class User {
       method: "POST",
       data: {token: userToken}
     });
-
+    //TODO: consider large scale (prepend)
     currentUser.favorites = response.data.user.favorites;
     // console.log(currentUser.favorites);
+
+  }
+
+  //TODO: make some function (#privateMethod; can only be called by instance methods)
+
+  async #addOrRemoveFavorite(story, requesType) {
 
   }
 
