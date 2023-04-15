@@ -29,6 +29,16 @@ class Story {
     return workingUrl.hostname;
   }
 
+  /** takes in storyId and returns the Story object */
+  static getStoryFromId(storyID) {
+    for (let story of storyList.stories) {
+      if (story.storyId === storyID) {
+        return story
+      }
+    }
+    return undefined;
+  }
+
   /** takes in storyId and checks if it's a favorite and returns boolean */
   static storyInFavorites(storyId) {
     for (let story of currentUser.favorites) {
@@ -223,17 +233,8 @@ class User {
     }
   }
 
-  /** Takes a Story instance, remaps currentUser.favorites to
-   *  API response object favorites. Also makes POST request to API
-   *  for creating a new favorite story
-   */
-  //TODO: let or const: be consistent. Destructure currentUser object (same variables)
-  async addFavoriteStory(story) {
-   this.#addOrRemoveFavorite(story, "POST");
-  }
 
   //TODO: make some function (#privateMethod; can only be called by instance methods)
-
   async #addOrRemoveFavorite(story, requestType) {
     let username = currentUser.username;
     let loginToken = currentUser.loginToken;
@@ -246,6 +247,15 @@ class User {
     });
 
     currentUser.favorites = response.data.user.favorites;
+  }
+
+  /** Takes a Story instance, remaps currentUser.favorites to
+   *  API response object favorites. Also makes POST request to API
+   *  for creating a new favorite story
+   */
+  //TODO: let or const: be consistent. Destructure currentUser object (same variables)
+  async addFavoriteStory(story) {
+   this.#addOrRemoveFavorite(story, "POST");
   }
 
   /** Takes a Story instance and REMOVES input story and remaps

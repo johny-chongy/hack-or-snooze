@@ -59,7 +59,7 @@ function putFavoritesOnPage(){
   // loop through all of our stories and generate HTML for them
   //prepend to container instead of loop
   for (let story of currentUser.favorites) {
-    console.log("story is", story);
+    // console.log("story is", story);
     const $story = generateFavoritesMarkup(new Story({...story}));
     $allStoriesList.append($story);
   }
@@ -111,29 +111,16 @@ $submitForm.on("submit", retrieveNewStory);
 
 
 function clickStar(evt) {
-  let clickedStory;
   let clickedStoryId = $(evt.target).closest("li").attr('id');
+  let clickedStory = Story.getStoryFromId(clickedStoryId);
+  // console.log('you clicked on ', evt.target);
 
-  console.log('you clicked on ', evt.target);
-  for (let story of storyList.stories) {
-    if (story.storyId === clickedStoryId) {
-      clickedStory = story;
-      // console.log("clickedStory=", clickedStory);
-      break;
-    }
-  }
-  // console.log(clickedStoryId);
-  // console.log("clickStar start");
   $(evt.target).toggleClass("bi-star bi-star-fill");
-  // console.log("class=",$(evt.target).attr("class"));
 
   if($(evt.target).attr("class") === "bi bi-star") {
     currentUser.removeFavoriteStory(clickedStory);
-    clickedStory.starIsFilled = false;
   } else if ($(evt.target).attr("class") === "bi bi-star-fill") {
     currentUser.addFavoriteStory(clickedStory);
-    clickedStory.starIsFilled = true;
-    // console.log("currentUser.favorites=", currentUser.favorites);
   }
 
 }
