@@ -35,11 +35,11 @@ function generateFavoritesMarkup(favorite) {
  * Returns the markup for the story.
  */
 function generateStoryMarkup(story) {
-
+  const favoriteIcon = (currentUser) ? "bi-star" : "";
   const hostName = story.getHostName();
   return $(`
   <li id="${story.storyId}">
-  <i class= "bi bi-star"></i>
+  <i class= "bi ${favoriteIcon}"></i>
   <a href="${story.url}" target="a_blank" class="story-link">
   ${story.title}
   </a>
